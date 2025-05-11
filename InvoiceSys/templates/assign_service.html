@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container mx-auto my-10 p-5 bg-white rounded">
+    <!-- Display success/error messages -->
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+        <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+            aria-hidden="true">
+            <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+            </div>
+        </div>
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">SERVICES</h2>
+            <p class="mt-2 text-lg/8 text-gray-600">To add a new service,fill out the necessary information.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Form Section -->
+            <div>
+
+                <h2 class="text-xl font-bold mb-5" role="alert">Assign Services to Client</h2>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button type="submit"
+                        class="bg-blue-500 text-white px-4 py-2 my-4 rounded shadow hover:bg-blue-700">
+                        Submit
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- Display Saved Data Section -->
+            <div>
+                <h2 class="text-xl font-bold mb-5">Saved Services</h2>
+
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    ID
+                                </th>
+
+                                <th scope="col" class="px-6 py-3">
+                                    Client Name
+                                </th>
+
+                                <th scope="col" class="px-6 py-3">
+                                    Service Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Service quantity
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Service price
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    <span class="sr-only">Action</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if assigned_service %}
+                            {% for service in assigned_service %}
+
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="px-6 py-4">
+                                    {{service.id}}
+                                </td>
+
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{service.account_details.client_name}}
+                                </th>
+
+                                <td class="px-6 py-4">
+                                    {{service.service_name}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{service.service_quantity}}
+                                </td>
+                                <th scope="row" class="px-6 py-4">
+
+                                    {{service.service_price}}
+                                </th>
+                                
+                                
+                                <td class="px-6 py-4 text-right">
+                                    <a href="{% url 'assign-service-list' service.account_details.id %}"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-red-500">No saved data found.</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% endblock body %}

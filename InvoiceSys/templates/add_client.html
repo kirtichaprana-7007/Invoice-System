@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container mx-auto my-10 p-5 bg-white rounded shadow-md">
+
+    <!-- Display success/error messages -->
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <!-- Form Section -->
+        <div>
+
+            <h2 class="text-xl font-bold mb-5" role="alert">Create New Account</h2>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 my-4 rounded shadow hover:bg-blue-700">
+                    Submit
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Display Saved Data Section -->
+        <div>
+            <h2 class="text-xl font-bold mb-5">Saved Account Details</h2>
+
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                ID
+                            </th>
+
+                            <th scope="col" class="px-6 py-3">
+                                Client Name
+                            </th>
+                            
+                            <th scope="col" class="px-6 py-3">
+                                Address
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Phone No
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Action</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if account_details %}
+                            {% for obj in account_details %}
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="px-6 py-4">
+                                    {{obj.id}}
+                                </td>
+
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ obj.client_name }}
+                                </th>
+                                
+                                <td class="px-6 py-4">
+                                    {{obj.client_address}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{obj.client_phone_number}}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="{% url 'account-details-review' obj.id %}"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-red-500">No saved data found.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container mx-auto my-10 p-5 bg-white rounded">
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 bg-gray-50 rounded-lg shadow-md">
+        <!-- Card 1 -->
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider Name</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_name}}</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider Address</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_address}}</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider Phone No.</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_phone_number}}</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider Email</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_email}}</p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider A/C No.</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_account_no}}</p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider IFSC Code</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_ifsc_code}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider Bank Name</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_bannk_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider Branch Name</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_bank_branch}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Provider GST No.</strong>
+            <p class="text-gray-600 mt-2">{{single_account.provider_gst_no}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client Name</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client Address</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client Phone No.</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client Email</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client Account No.</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client IFSC Code</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client Bank Name</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client Bank Branch</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-5">
+            <strong class="block text-lg font-medium text-gray-700">Client GST No.</strong>
+            <p class="text-gray-600 mt-2">{{single_account.client_name}}</p>
+        </div>
+    </div>
+
+    <div class = "flex flex-wrap justify-center space-x-2 space-y-2">
+        <!-- Back Button -->
+        <a type="button" href="{% url 'add-client' %}"
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+            Back
+        </a>
+        
+
+        <!-- Edit Button -->
+        <a type="button" href="{% url 'update-account-details' single_account.id %}"
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+            Edit
+        </a>
+
+        <!-- Delete Button -->
+        <a href="{% url 'delete-account-details' single_account.id %}"
+            onclick="return confirm('Are you sure you want to delete this item?')"
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+            Delete
+        </a>
+    </div>
+
+
+
+
+
+</div>
+
+
+{% endblock body %}
